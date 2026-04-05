@@ -93,7 +93,7 @@ The system enforces three distinct roles to ensure data privacy and administrati
 
 The project includes an interactive **Swagger UI**. Once the server is running, navigate to:
 
-👉 **[http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/docs)**
+**[http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/docs)**
 
 From here, you can:
 
