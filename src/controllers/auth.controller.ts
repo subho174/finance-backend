@@ -9,6 +9,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import { StatusType } from "../types/types.js";
 
+//  Registers a new user and hashes the password
 export const signUp = async (req: Request, res: Response) => {
   if (!req.body) {
     throw new ApiError(400, "Request body is required");
@@ -54,6 +55,7 @@ export const signUp = async (req: Request, res: Response) => {
     .json(new ApiResponse(201, "User created successfully", user));
 };
 
+// Authenticates a user and issues a JWT via an HTTP-only cookie
 export const logIn = async (req: Request, res: Response) => {
   if (!req.body) {
     throw new ApiError(400, "Request body is required");
@@ -116,7 +118,7 @@ export const logIn = async (req: Request, res: Response) => {
       }),
     );
 };
-
+// Clear the authentication cookie to log out the user
 export const logOut = async (_: Request, res: Response) => {
   return res
     .status(200)

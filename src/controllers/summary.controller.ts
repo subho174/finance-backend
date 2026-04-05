@@ -6,6 +6,7 @@ import { and, desc, eq, gte, isNull, sql, sum } from "drizzle-orm";
 import { CategoryType, RoleType } from "../types/types.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+// Calculates dashboard statistics including totals, category breakdown, and recent activity (Self for Viewers, Global for Analyst/Admin)
 export const getDashboardSummary = async (req: Request, res: Response) => {
   if (!req.user?.id) {
     throw new ApiError(401, "Unauthorized");
@@ -93,6 +94,7 @@ export const getDashboardSummary = async (req: Request, res: Response) => {
     );
 };
 
+// Generates monthly income vs expense trends for a specified lookback period (Self for Viewers, Global for Analyst/Admin)
 export const getMonthlyTrends = async (req: Request, res: Response) => {
   if (!req.user?.id) {
     throw new ApiError(401, "Unauthorized");

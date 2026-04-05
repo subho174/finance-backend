@@ -1,3 +1,4 @@
+// Custom Error class for standardized API error responses
 class ApiError extends Error {
   public success: boolean = false;
 

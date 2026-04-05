@@ -1,3 +1,4 @@
+// Standardized API Response wrapper
 class ApiResponse<T> {
   public success: boolean;
 

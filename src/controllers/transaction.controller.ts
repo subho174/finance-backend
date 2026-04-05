@@ -11,6 +11,7 @@ import ApiError from "../utils/ApiError.js";
 import { and, eq, gte, isNull, lte } from "drizzle-orm";
 import { RoleType, StatusType } from "../types/types.js";
 
+// Fetches transactions with optional type/category/date filtering
 export const getTransactions = async (req: Request, res: Response) => {
   if (!req.user?.id) {
     throw new ApiError(401, "Unauthorized");
@@ -66,6 +67,7 @@ export const getTransactions = async (req: Request, res: Response) => {
     );
 };
 
+// Creates a new transaction for a specific user (Admin only)
 export const createTransaction = async (req: Request, res: Response) => {
   if (!req.user?.id) {
     throw new ApiError(401, "Unauthorized");
@@ -132,6 +134,7 @@ export const createTransaction = async (req: Request, res: Response) => {
     );
 };
 
+// Updates an existing transaction's details (Admin only)
 export const updateTransaction = async (req: Request, res: Response) => {
   const { transactionId } = req.params;
 
@@ -187,6 +190,7 @@ export const updateTransaction = async (req: Request, res: Response) => {
     .json(new ApiResponse(200, "Transaction updated successfully", response));
 };
 
+// Soft deletes a transaction (Admin only)
 export const deleteTransaction = async (req: Request, res: Response) => {
   const { transactionId } = req.params;
 

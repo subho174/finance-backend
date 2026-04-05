@@ -8,6 +8,7 @@ import { RoleType, StatusType } from "../types/types.js";
 import { adminCreateUserSchema } from "../schema/authSchema.js";
 import bcrypt from "bcrypt";
 
+// Directly creates a new user (Admin only)
 export const createUser = async (req: Request, res: Response) => {
   if (!req.body) {
     throw new ApiError(400, "Request body is required");
@@ -55,6 +56,7 @@ export const createUser = async (req: Request, res: Response) => {
     .json(new ApiResponse(201, "User created successfully by Admin", response));
 };
 
+// Fetches all users in the system (Admin only)
 export const getAllUsers = async (_: Request, res: Response) => {
   const allUsers = await db.query.users.findMany({
     columns: {
@@ -67,6 +69,7 @@ export const getAllUsers = async (_: Request, res: Response) => {
     .json(new ApiResponse(200, "Fetched all users", allUsers));
 };
 
+// Updates user role or status (Admin only)
 export const updateUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const { role, status } = req.body;

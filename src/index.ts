@@ -14,6 +14,7 @@ import { transactionRouter } from "./routes/transaction.routes.js";
 import summaryRouter from "./routes/summary.routes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./utils/swagger.js";
+import { apiLimiter, authLimiter } from "./middleware/limiter.middleware.js";
 
 if (!process.env.PORT) {
   throw new Error("PORT was not provided in .env file");
@@ -43,7 +44,8 @@ app.get("/", (_, res: Response) => {
 
 const apiRouter = Router();
 
-apiRouter.use("/auth", authRouter);
+apiRouter.use(apiLimiter);
+apiRouter.use("/auth", authLimiter, authRouter);
 apiRouter.use("/users", userRouter);
 apiRouter.use("/transactions", transactionRouter);
 apiRouter.use("/summary", summaryRouter);

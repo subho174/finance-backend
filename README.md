@@ -108,3 +108,13 @@ From here, you can:
 - **Validation-First**: No request reaches the controller logic without passing through a Zod schema validation middleware.
 - **Centralised Error Handling**: A unified `ApiError` utility ensures that every failure returns a consistent JSON structure and appropriate HTTP status code.
 - **DRY Architecture**: Reusable middleware for authentication and role authorization (`authorizeRoles`).
+- **Comprehensive Documentation**: Every controller and utility is documented using JSDoc for maximum maintainability.
+
+---
+
+## Security & Rate Limiting
+
+To protect against DDoS attacks, brute-force attempts, and API abuse, the system implements tiered rate limiting:
+
+- **General API Limiter**: Limits all generic `/api/v1` requests to **100 requests per 15 minutes** per IP.
+- **Auth Limiter**: Implements a stricter policy for `/auth` routes (Login/Signup), limiting attempts to **15 per 15 minutes** to prevent account brute-forcing.
